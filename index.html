@@ -364,7 +364,7 @@ section[id] { scroll-margin-top: calc(var(--bandeau-h) + var(--header-h) + 8px);
   color: var(--encre);
 }
 
-/* Visuel décoratif : couches d'un mur (support → enduit → finition) */
+/* Visuel : les 3 étapes d'un mur (support → enduit → finition) en photos */
 .hero-visual { display: none; }
 .wall-stack {
   display: flex;
@@ -377,30 +377,47 @@ section[id] { scroll-margin-top: calc(var(--bandeau-h) + var(--header-h) + 8px);
 .wall-layer {
   position: relative;
   height: 118px;
-  display: flex;
-  align-items: flex-end;
-  padding: 14px 18px;
+  overflow: hidden;
+  margin: 0;
 }
-.wall-layer span {
+.wall-layer img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Voile sombre en bas pour la lisibilité du label */
+.wall-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, color-mix(in srgb, var(--encre) 72%, transparent), transparent 58%);
+}
+.wall-layer figcaption {
+  position: absolute;
+  left: 18px;
+  bottom: 13px;
+  z-index: 1;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
+  color: var(--blanc);
 }
-.wall-layer.l1 { background: var(--ciment); }
-.wall-layer.l1 span { color: var(--blanc); }
-.wall-layer.l2 { background: var(--calcaire); }
-.wall-layer.l2 span { color: var(--encre); }
-.wall-layer.l3 { background: var(--ardoise); }
-.wall-layer.l3 span { color: var(--blanc); }
 .wall-tag {
   position: absolute;
-  top: 14px;
-  right: 16px;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 13px;
+  font-size: 12px;
+  color: var(--blanc);
+  background: color-mix(in srgb, var(--ardoise) 88%, transparent);
+  padding: 3px 9px;
+  border-radius: var(--radius-sm);
 }
 
 /* ============================================================
@@ -831,15 +848,25 @@ textarea:focus-visible {
           </div>
         </div>
 
-        <!-- Visuel décoratif : les couches d'un mur bien fini -->
-        <div class="hero-visual reveal" aria-hidden="true">
+        <!-- Visuel : les 3 étapes d'un mur (support → enduit → finition) -->
+        <div class="hero-visual reveal">
           <div class="wall-stack">
-            <div class="wall-layer l1"><span>Support</span></div>
-            <div class="wall-layer l2"><span>Enduit</span></div>
-            <div class="wall-layer l3">
+            <figure class="wall-layer">
+              <img src="https://images.pexels.com/photos/1101125/pexels-photo-1101125.jpeg?auto=compress&cs=tinysrgb&w=700"
+                   alt="Mur en briques brutes avant travaux" loading="lazy" decoding="async" width="700" height="467">
+              <figcaption>Support</figcaption>
+            </figure>
+            <figure class="wall-layer">
+              <img src="https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=700"
+                   alt="Application d'enduit sur un mur à la taloche" loading="lazy" decoding="async" width="700" height="1050">
+              <figcaption>Enduit</figcaption>
+            </figure>
+            <figure class="wall-layer">
+              <img src="https://images.pexels.com/photos/1843717/pexels-photo-1843717.jpeg?auto=compress&cs=tinysrgb&w=700"
+                   alt="Mur enduit et lissé, finition blanche soignée" loading="lazy" decoding="async" width="700" height="491">
+              <figcaption>Finition</figcaption>
               <span class="wall-tag">Vienne (86)</span>
-              <span>Finition</span>
-            </div>
+            </figure>
           </div>
         </div>
       </div>
